@@ -1,23 +1,22 @@
 """Script de teste rápido do pipeline EstetiScan AI."""
-from motor.facade import processar_lote, gerar_relatorio
-from collections import Counter
+from motor.facade import processar_lote, gerar_relatorio, imprimir_resumo
 
-resultados = processar_lote("data/original")
+batch = processar_lote("data/original")
+resultados = batch["resultados"]
+resumo = batch["resumo"]
 
-c = Counter(r["status_cliente"] for r in resultados)
-print("=== RESUMO ===")
-for k, v in sorted(c.items()):
-    print(f"  {k}: {v}")
-print(f"  TOTAL: {len(resultados)}")
-print()
+# Resumo formatado
+imprimir_resumo(resumo)
 
+# Detalhe por imagem
 for r in resultados:
     nome = r["arquivo"][:45]
     status = r["status_cliente"]
     sep = r.get("separabilidade_otsu")
     sep_s = f"{sep:.2f}" if sep is not None else "N/A"
     eq = r.get("needs_equalization")
-    print(f"{nome:45s} -> {status:30s} sep={sep_s}  eq={eq}")
+    review = r.get("requires_human_review")
+    print(f"{nome:45s} -> {status:30s} sep={sep_s}  eq={eq}  review={review}")
 
 print()
 csv_path = gerar_relatorio(resultados)

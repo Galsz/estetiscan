@@ -14,8 +14,8 @@ import numpy as np
 from motor.io import read_color, to_grayscale
 from motor.quality import QualityMetrics, compute_metrics, apply_clahe
 from motor.segment import SegmentationResult, segment, check_viability
-from motor.pipeline import process_image, process_batch
-from motor.report import gerar_relatorio
+from motor.pipeline import process_image, process_batch, build_summary
+from motor.report import gerar_relatorio, imprimir_resumo
 
 
 def analisar_qualidade(gray: np.ndarray) -> QualityMetrics:
@@ -97,7 +97,7 @@ def processar_imagem(
 def processar_lote(
     pasta_entrada: str | Path,
     pasta_saida: Optional[str | Path] = None,
-) -> list[dict[str, Any]]:
+) -> dict[str, Any]:
     """Processa todas as imagens de um diretório.
 
     Args:
@@ -105,6 +105,7 @@ def processar_lote(
         pasta_saida: Diretório onde salvar artefatos (opcional).
 
     Returns:
-        Lista de dicionários, um por imagem processada.
+        Dicionário com ``resultados`` (lista) e ``resumo`` (contagem por
+        categoria).
     """
     return process_batch(pasta_entrada, output_dir=pasta_saida)

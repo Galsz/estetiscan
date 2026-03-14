@@ -188,7 +188,7 @@ def process_image(
 def process_batch(
     input_dir: str | Path,
     output_dir: Optional[str | Path] = None,
-) -> list[dict[str, Any]]:
+) -> dict[str, Any]:
     """Processa todas as imagens suportadas de um diretório.
 
     Args:
@@ -196,14 +196,46 @@ def process_batch(
         output_dir: Diretório raiz para artefatos.
 
     Returns:
-        Lista de dicionários, um por imagem processada.
+        Dicionário com ``resultados`` (lista) e ``resumo`` (contagem por
+        categoria).
     """
     images = list_images(input_dir)
     results: list[dict[str, Any]] = []
-    for img_path in images:
+    total = len(images)
+
+    for idx, img_path in enumerate(images, 1):
+        print(f"[{idx}/{total}] Processando: {img_path.name}")
         result = process_image(img_path, output_dir=output_dir)
         results.append(result)
-    return results
+        print(f"          -> {result['status_cliente']}")
+
+    summary = build_summary(results)
+    return {"resultados": results, "resumo": summary}
+
+
+def build_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
+    """Gera um resumo com contagem por categoria."""
+    categories = [
+        config.STATUS_IDEAL,
+        config.STATUS_ADEQUATE,
+        config.STATUS_AUTO_CORRECTED,
+        config.STATUS_NO_GAIN,
+        config.STATUS_HUMAN_REVIEW,
+    ]
+    counts = {cat: 0 for cat in categories}
+    for r in results:
+        status = r.get("status_cliente", "")
+        if status in counts:
+            counts[status] += 1
+
+    return {
+        "total": len(results),
+        "contagem": counts,
+        "revisao_humana_arquivos": [
+            r["arquivo"] for r in results
+            if r.get("requires_human_review")
+        ],
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -248,6 +280,9 @@ def _classify(
     # Correção tentada sem ganho relevante
     if not correction_valid:
         return config.STATUS_NO_GAIN
+
+    # Caso residual
+    return config.STATUS_HUMAN_REVIEW
 
     # Qualquer outro caso → revisão humana
     return config.STATUS_HUMAN_REVIEW
