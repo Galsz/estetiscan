@@ -11,6 +11,8 @@ Uso:
 
 from __future__ import annotations
 
+import os
+
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -22,10 +24,18 @@ app = FastAPI(
     version="0.1.0",
 )
 
+
+def _get_allowed_origins() -> list[str]:
+    configured = os.getenv("CORS_ORIGINS", "").strip()
+    default_origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
+    if not configured:
+        return default_origins
+    return [origin.strip() for origin in configured.split(",") if origin.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
-    allow_methods=["POST"],
+    allow_origins=_get_allowed_origins(),
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
