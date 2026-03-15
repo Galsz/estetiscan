@@ -16,6 +16,7 @@ from motor.quality import QualityMetrics, compute_metrics, apply_clahe
 from motor.segment import SegmentationResult, segment, check_viability
 from motor.pipeline import process_image, process_batch, build_summary
 from motor.report import gerar_relatorio, imprimir_resumo
+from motor.showcase import gerar_galeria
 
 
 def analisar_qualidade(gray: np.ndarray) -> QualityMetrics:

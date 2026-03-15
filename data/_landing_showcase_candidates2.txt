@@ -1,0 +1,11 @@
+noise_4.jpg|corrigida_automaticamente|0.6543051872220361|True|False
+noise_6.jpg|corrigida_automaticamente|0.642026564327152|True|False
+noise_8.jpg|corrigida_automaticamente|0.6457964626623613|True|False
+noise_10.jpg|corrigida_automaticamente|0.648486432184826|True|False
+noise_12.jpg|corrigida_automaticamente|0.6530979856486583|True|False
+noise_16.jpg|corrigida_automaticamente|0.6587639266267771|True|False
+noise_bright_4.jpg|corrigida_automaticamente|0.6446049681173277|True|False
+noise_bright_6.jpg|corrigida_automaticamente|0.6459292241128596|True|False
+noise_bright_8.jpg|corrigida_automaticamente|0.6480686797739429|True|False
+noise_bright_10.jpg|corrigida_automaticamente|0.6491106204625962|True|False
+gradient_noise.jpg|corrigida_automaticamente|0.6527553840972259|True|False

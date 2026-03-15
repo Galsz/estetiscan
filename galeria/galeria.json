@@ -1,0 +1,48 @@
+{
+  "ideal": [
+    {
+      "arquivo": "ChatGPT Image 14 de mar. de 2026, 15_57_14 1.png",
+      "status_cliente": "ideal",
+      "separabilidade_otsu": 0.6503910398753122,
+      "limiar_otsu": 150,
+      "needs_equalization": false
+    },
+    {
+      "arquivo": "ChatGPT Image 14 de mar. de 2026, 15_57_14 2.png",
+      "status_cliente": "ideal",
+      "separabilidade_otsu": 0.6926916415723416,
+      "limiar_otsu": 164,
+      "needs_equalization": false
+    },
+    {
+      "arquivo": "ChatGPT Image 14 de mar. de 2026, 15_57_14 4.png",
+      "status_cliente": "ideal",
+      "separabilidade_otsu": 0.6618245339052818,
+      "limiar_otsu": 130,
+      "needs_equalization": false
+    }
+  ],
+  "corrigida_automaticamente": [
+    {
+      "arquivo": "ChatGPT Image 14 de mar. de 2026, 15_57_14 3.png",
+      "status_cliente": "corrigida_automaticamente",
+      "separabilidade_otsu": 0.6349460676446833,
+      "limiar_otsu": 157,
+      "needs_equalization": true
+    },
+    {
+      "arquivo": "ChatGPT Image 14 de mar. de 2026, 16_00_44 1.png",
+      "status_cliente": "corrigida_automaticamente",
+      "separabilidade_otsu": 0.7016562803719031,
+      "limiar_otsu": 67,
+      "needs_equalization": true
+    },
+    {
+      "arquivo": "ChatGPT Image 14 de mar. de 2026, 16_00_44 2.png",
+      "status_cliente": "corrigida_automaticamente",
+      "separabilidade_otsu": 0.7113741824428822,
+      "limiar_otsu": 179,
+      "needs_equalization": true
+    }
+  ]
+}
